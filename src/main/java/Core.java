@@ -17,7 +17,7 @@ public class Core {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // test czy działa json
-
+        StringBuilder resultForPDF = new StringBuilder();
         int howMany = 0;
         // list iteration handling
         try {
@@ -44,6 +44,7 @@ public class Core {
                         while (j < lang.getWords().length){
                             if (lang.getWords()[j].equals(userInput)){
                                 System.out.println(lang.getWords()[j] + " found in: " + lang.getLanguage());
+                                resultForPDF.append(lang.getWords()[j]).append(" found in: ").append(lang.getLanguage());
                                 howMany++;
 
                             }
@@ -61,14 +62,23 @@ public class Core {
                  e.printStackTrace();
                  System.out.println("Error handling lib.json");
             }
+
+
+            ///Result output
+
+
             // print how many
             if (howMany == 1){
                 System.out.println("Word appeared in " + howMany + " language.");
+                resultForPDF.append("Word appeared in ").append(howMany).append(" language.");
 
             }else if (howMany > 1){
             System.out.println("Word appeared in " + howMany + " languages.");
+            resultForPDF.append("Word appeared in ").append(howMany).append(" languages.");
+
             } else{
                 System.out.println("Word didn't appear in any of stored languages");
+                resultForPDF.append("Word didn't appear in any of stored languages");
             }
             /// print how many
         /// list iteration handling
